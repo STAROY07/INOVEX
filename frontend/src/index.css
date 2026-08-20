@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0B0F17;
+    color: #F1F5F9;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Glassmorphism & UI Tokens */
+.glass-panel {
+  background: rgba(20, 27, 45, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(26, 34, 52, 0.85);
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.18);
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(26, 34, 52, 0.6) 0%, rgba(15, 21, 36, 0.75) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.badge-glow {
+  box-shadow: 0 0 12px -2px rgba(99, 102, 241, 0.4);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0F17;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Markdown styling inside documents and chat */
+.prose-custom {
+  color: #CBD5E1;
+  line-height: 1.7;
+}
+
+.prose-custom h1 {
+  font-family: 'Outfit', sans-serif;
+  color: #F8FAFC;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #1E293B;
+  padding-bottom: 0.5rem;
+}
+
+.prose-custom h2 {
+  font-family: 'Outfit', sans-serif;
+  color: #F1F5F9;
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-custom h3 {
+  font-family: 'Outfit', sans-serif;
+  color: #E2E8F0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.prose-custom p {
+  margin-bottom: 0.75rem;
+}
+
+.prose-custom ul, .prose-custom ol {
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-custom li {
+  margin-bottom: 0.35rem;
+}
+
+.prose-custom table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.prose-custom th, .prose-custom td {
+  border: 1px solid #334155;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.prose-custom th {
+  background-color: #1E293B;
+  color: #F8FAFC;
+  font-weight: 600;
+}
+
+.prose-custom blockquote {
+  border-left: 3px solid #6366F1;
+  padding-left: 1rem;
+  color: #94A3B8;
+  font-style: italic;
+  margin: 1rem 0;
+}
