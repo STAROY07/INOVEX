@@ -43,6 +43,15 @@ export const AuthProvider = ({ children }) => {
     return userData;
   };
 
+  const demoLogin = async () => {
+    const res = await api.post('/auth/demo');
+    const { access_token, user: userData } = res.data;
+    localStorage.setItem('inovex_token', access_token);
+    setToken(access_token);
+    setUser(userData);
+    return userData;
+  };
+
   const requestPasswordReset = async (email) => {
     const res = await api.post('/auth/forgot-password', { email });
     return res.data;
@@ -64,7 +73,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, loading, login, signup, requestPasswordReset, logout, updateProfile, isAuthenticated: !!token }}>
+    <AuthContext.Provider value={{ user, token, loading, login, signup, demoLogin, requestPasswordReset, logout, updateProfile, isAuthenticated: !!token }}>
       {children}
     </AuthContext.Provider>
   );

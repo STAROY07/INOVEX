@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { Navbar } from '../components/Navbar';
 
 export const AuthPage = () => {
-  const { login, signup, requestPasswordReset, isAuthenticated } = useAuth();
+  const { login, signup, demoLogin, requestPasswordReset, isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,6 +18,20 @@ export const AuthPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
+
+  const [coldStartNotice, setColdStartNotice] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (loading) {
+      timer = setTimeout(() => {
+        setColdStartNotice(true);
+      }, 3500);
+    } else {
+      setColdStartNotice(false);
+    }
+    return () => clearTimeout(timer);
+  }, [loading]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -40,29 +54,47 @@ export const AuthPage = () => {
     setSuccess('');
     setLoading(true);
 
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPassword = password;
+    const cleanFullName = fullName.trim();
+
     try {
       if (isForgotPassword) {
-        await requestPasswordReset(email);
+        if (!cleanEmail) {
+          setError('Please enter your email address.');
+          setLoading(false);
+          return;
+        }
+        await requestPasswordReset(cleanEmail);
         setSuccess('If an account exists for this email, reset instructions have been sent.');
       } else if (isLogin) {
-        await login(email, password);
+        if (!cleanEmail || !cleanPassword) {
+          setError('Please enter both email and password.');
+          setLoading(false);
+          return;
+        }
+        await login(cleanEmail, cleanPassword);
         navigate('/dashboard');
       } else {
-        if (!fullName.trim()) {
+        if (!cleanFullName) {
           setError('Please enter your full name');
           setLoading(false);
           return;
         }
-        if (password.length < 6) {
+        if (cleanPassword.length < 6) {
           setError('Password must be at least 6 characters');
           setLoading(false);
           return;
         }
-        await signup(email, password, fullName);
+        await signup(cleanEmail, cleanPassword, cleanFullName);
         navigate('/onboarding');
       }
     } catch (err) {
-      setError(err.response?.data?.detail || err.message || 'Authentication failed. Please check your credentials.');
+      const errorMsg =
+        err.response?.data?.detail ||
+        err.message ||
+        'Authentication failed. Please check your credentials or try again.';
+      setError(typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg));
     } finally {
       setLoading(false);
     }
@@ -81,15 +113,23 @@ export const AuthPage = () => {
     setError('');
     setLoading(true);
     try {
-      await login('founder@inovex.ai', 'startup123');
+      if (demoLogin) {
+        await demoLogin();
+      } else {
+        await login('founder@inovex.ai', 'startup123');
+      }
       navigate('/dashboard');
     } catch (err) {
-      // If demo user doesn't exist, create it!
       try {
-        await signup('founder@inovex.ai', 'startup123', 'Aarav Sharma');
+        await login('founder@inovex.ai', 'startup123');
         navigate('/dashboard');
-      } catch (signupErr) {
-        setError('Demo login failed. Please try normal registration.');
+      } catch (loginErr) {
+        const msg =
+          err.response?.data?.detail ||
+          loginErr.response?.data?.detail ||
+          err.message ||
+          'Demo login failed. Please register a new account.';
+        setError(typeof msg === 'string' ? msg : 'Demo login failed.');
       }
     } finally {
       setLoading(false);
@@ -219,7 +259,7 @@ export const AuthPage = () => {
               className="w-full py-3 rounded-xl bg-primary-600 hover:bg-primary-500 text-white font-semibold text-sm shadow-glow-sm transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-50"
             >
               {loading ? (
-                <span>Processing...</span>
+                <span>{coldStartNotice ? 'Waking up server...' : 'Processing...'}</span>
               ) : (
                 <>
                   <span>{isForgotPassword ? 'Send Reset Instructions' : isLogin ? 'Sign In' : 'Create Account'}</span>
@@ -227,6 +267,11 @@ export const AuthPage = () => {
                 </>
               )}
             </button>
+            {coldStartNotice && (
+              <p className="text-[11px] text-amber-300/90 text-center animate-pulse mt-1">
+                Waking up backend instance on Render (first request may take ~20-30s)...
+              </p>
+            )}
           </form>
 
           {/* Quick Demo Access */}
