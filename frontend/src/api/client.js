@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Get base URL with environment variable support and safe /api suffix handling
 const getBaseURL = () => {
-  let url = (import.meta.env.VITE_API_URL || 'https://inovex-api.onrender.com').trim();
+  let url = (import.meta.env.VITE_API_URL || 'http://localhost:8000').trim();
   // Ensure we don't have trailing slash
   url = url.replace(/\/+$/, '');
   // Append /api if not already present
@@ -14,7 +14,7 @@ const getBaseURL = () => {
 
 const api = axios.create({
   baseURL: getBaseURL(),
-  timeout: 60000, // 60s timeout to gracefully accommodate Render free-tier cold starts
+  timeout: 15000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -46,11 +46,10 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Handle timeout error (e.g. Render sleeping / cold starting)
     if (error.code === 'ECONNABORTED' || (error.message && error.message.toLowerCase().includes('timeout'))) {
-      error.message = 'The server is waking up from standby (Render cold start). Please click again in 10-15 seconds.';
+      error.message = 'Server request timed out. Please check if your backend server is running.';
     } else if (!error.response) {
-      error.message = 'Unable to reach the INOVEX backend server. Please verify your connection or try again shortly.';
+      error.message = 'Unable to reach the INOVEX backend server (http://localhost:8000). Please start the backend or use Demo Login.';
     } else {
       error.message = getErrorMessage(error) || error.message;
     }

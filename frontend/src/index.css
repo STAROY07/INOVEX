@@ -4,38 +4,39 @@
 
 @layer base {
   body {
-    background-color: #0B0F17;
-    color: #F1F5F9;
+    background-color: #FFFFFF;
+    color: #0F172A;
     overflow-x: hidden;
   }
 }
 
-/* Custom Glassmorphism & UI Tokens */
+/* Custom UI Tokens & Cards for Light Theme */
 .glass-panel {
-  background: rgba(20, 27, 45, 0.7);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.05);
 }
 
 .glass-panel-hover {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .glass-panel-hover:hover {
-  background: rgba(26, 34, 52, 0.85);
-  border-color: rgba(99, 102, 241, 0.4);
+  background: #FFFFFF;
+  border-color: #6366F1;
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.18);
+  box-shadow: 0 12px 28px -8px rgba(99, 102, 241, 0.15);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(26, 34, 52, 0.6) 0%, rgba(15, 21, 36, 0.75) 100%);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
 }
 
 .badge-glow {
-  box-shadow: 0 0 12px -2px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 0 10px -1px rgba(99, 102, 241, 0.25);
 }
 
 /* Custom Scrollbar */
@@ -45,38 +46,38 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B0F17;
+  background: #F8FAFC;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #CBD5E1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #94A3B8;
 }
 
 /* Markdown styling inside documents and chat */
 .prose-custom {
-  color: #CBD5E1;
+  color: #334155;
   line-height: 1.7;
 }
 
 .prose-custom h1 {
   font-family: 'Outfit', sans-serif;
-  color: #F8FAFC;
+  color: #0F172A;
   font-size: 1.75rem;
   font-weight: 700;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
-  border-bottom: 1px solid #1E293B;
+  border-bottom: 1px solid #E2E8F0;
   padding-bottom: 0.5rem;
 }
 
 .prose-custom h2 {
   font-family: 'Outfit', sans-serif;
-  color: #F1F5F9;
+  color: #1E293B;
   font-size: 1.35rem;
   font-weight: 600;
   margin-top: 1.25rem;
@@ -85,7 +86,7 @@
 
 .prose-custom h3 {
   font-family: 'Outfit', sans-serif;
-  color: #E2E8F0;
+  color: #334155;
   font-size: 1.1rem;
   font-weight: 600;
   margin-top: 1rem;
@@ -112,21 +113,21 @@
 }
 
 .prose-custom th, .prose-custom td {
-  border: 1px solid #334155;
+  border: 1px solid #E2E8F0;
   padding: 0.5rem 0.75rem;
   text-align: left;
 }
 
 .prose-custom th {
-  background-color: #1E293B;
-  color: #F8FAFC;
+  background-color: #F8FAFC;
+  color: #0F172A;
   font-weight: 600;
 }
 
 .prose-custom blockquote {
   border-left: 3px solid #6366F1;
   padding-left: 1rem;
-  color: #94A3B8;
+  color: #64748B;
   font-style: italic;
   margin: 1rem 0;
 }

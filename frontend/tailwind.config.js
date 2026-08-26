@@ -4,16 +4,15 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        background: '#0B0F17',
+        background: '#FFFFFF',
         surface: {
-          50: '#1A2234',
-          100: '#141B2D',
-          200: '#0F1524',
-          300: '#0B0F17'
+          50: '#F8FAFC',
+          100: '#F1F5F9',
+          200: '#E2E8F0',
+          300: '#CBD5E1'
         },
         primary: {
           50: '#EEF2FF',
@@ -22,18 +21,20 @@ export default {
           500: '#6366F1',
           600: '#4F46E5',
           700: '#4338CA',
+          800: '#3730A3',
+          900: '#312E81',
         },
         accent: {
-          cyan: '#06B6D4',
-          teal: '#14B8A6',
-          emerald: '#10B981',
-          amber: '#F59E0B',
-          rose: '#F43F5E',
-          purple: '#A855F7',
+          cyan: '#0891B2',
+          teal: '#0D9488',
+          emerald: '#059669',
+          amber: '#D97706',
+          rose: '#E11D48',
+          purple: '#9333EA',
         },
         border: {
-          subtle: '#1E293B',
-          glow: '#312E81'
+          subtle: '#E2E8F0',
+          glow: '#C7D2FE'
         }
       },
       fontFamily: {
@@ -41,14 +42,14 @@ export default {
         display: ['Outfit', 'sans-serif'],
       },
       boxShadow: {
-        'glow-sm': '0 0 15px -3px rgba(99, 102, 241, 0.25)',
-        'glow-md': '0 0 25px -4px rgba(99, 102, 241, 0.35)',
-        'glow-lg': '0 0 35px -5px rgba(99, 102, 241, 0.45)',
-        'glow-cyan': '0 0 25px -4px rgba(6, 182, 212, 0.35)',
+        'glow-sm': '0 4px 14px 0 rgba(99, 102, 241, 0.18)',
+        'glow-md': '0 6px 20px 0 rgba(99, 102, 241, 0.22)',
+        'glow-lg': '0 10px 30px 0 rgba(99, 102, 241, 0.28)',
+        'glow-cyan': '0 6px 20px 0 rgba(8, 145, 178, 0.20)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, rgba(11, 15, 23, 0) 70%)',
+        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.08) 0%, rgba(255, 255, 255, 0) 70%)',
       }
     },
   },

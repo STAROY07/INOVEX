@@ -6,18 +6,32 @@ from sqlalchemy.orm import sessionmaker
 
 logger = logging.getLogger("inovex.database")
 
-# Retrieve and sanitize DATABASE_URL
+# Build DATABASE_URL from environment variables or use default
 raw_db_url = (os.getenv("DATABASE_URL") or "").strip()
+
+# Check for individual MySQL environment variables if DATABASE_URL is not set
+if not raw_db_url:
+    mysql_user = os.getenv("MYSQL_USER")
+    mysql_password = os.getenv("MYSQL_PASSWORD")
+    mysql_host = os.getenv("MYSQL_HOST", "localhost")
+    mysql_port = os.getenv("MYSQL_PORT", "3306")
+    mysql_db = os.getenv("MYSQL_DATABASE", "inovex_db")
+
+    if mysql_user and mysql_password:
+        raw_db_url = f"mysql+pymysql://{mysql_user}:{mysql_password}@{mysql_host}:{mysql_port}/{mysql_db}"
+
 if not raw_db_url:
     DATABASE_URL = "sqlite:///./inovex.db"
 else:
     DATABASE_URL = raw_db_url
 
-# Render provides PostgreSQL URLs starting with 'postgres://' which SQLAlchemy 1.4+ does not support
-if DATABASE_URL.startswith("postgres://"):
+# Standardize dialect strings
+if DATABASE_URL.startswith("mysql://"):
+    DATABASE_URL = DATABASE_URL.replace("mysql://", "mysql+pymysql://", 1)
+elif DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-logger.info(f"Database dialect: {'sqlite' if DATABASE_URL.startswith('sqlite') else 'postgresql/other'}")
+logger.info(f"Database dialect configured: {DATABASE_URL.split(':')[0]}")
 
 # Engine configuration with connection pooling and health checks
 if DATABASE_URL.startswith("sqlite"):
@@ -27,6 +41,7 @@ if DATABASE_URL.startswith("sqlite"):
         pool_pre_ping=True
     )
 else:
+    # MySQL / PostgreSQL connection pool settings
     engine = create_engine(
         DATABASE_URL,
         pool_pre_ping=True,
