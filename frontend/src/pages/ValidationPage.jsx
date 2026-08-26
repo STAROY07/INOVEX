@@ -3,11 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   FlaskConical,
   PlusCircle,
-  Sparkles,
   Calendar,
-  CheckCircle2,
-  AlertTriangle,
-  RotateCcw,
   Trash2,
   X,
   FileSearch,
@@ -104,13 +100,13 @@ export const ValidationPage = () => {
   const getDecisionBadge = (decision) => {
     switch (decision) {
       case 'Persevere':
-        return 'bg-emerald-950/80 text-accent-emerald border-emerald-800/50';
+        return 'bg-emerald-50 text-emerald-800 border-emerald-200';
       case 'Pivot':
-        return 'bg-rose-950/80 text-accent-rose border-rose-800/50';
+        return 'bg-rose-50 text-rose-800 border-rose-200';
       case 'Iterate':
-        return 'bg-amber-950/80 text-accent-amber border-amber-800/50';
+        return 'bg-amber-50 text-amber-800 border-amber-200';
       default:
-        return 'bg-slate-800 text-slate-300 border-slate-700';
+        return 'bg-slate-100 text-slate-700 border-slate-200';
     }
   };
 
@@ -124,7 +120,7 @@ export const ValidationPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-slate-50 flex text-slate-900">
       <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
       <div className="flex-1 lg:pl-64 flex flex-col min-w-0">
@@ -149,27 +145,27 @@ export const ValidationPage = () => {
           ) : (
             <>
               {/* TOP BANNER */}
-              <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-surface-100 via-surface-100 to-primary-950/40 border border-slate-800 shadow-glow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="rounded-2xl p-6 sm:p-8 bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-accent-emerald uppercase tracking-wider">
+                    <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
                       Hypothesis Testing Hub
                     </span>
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                       {records.length} Evidence Records
                     </span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-display text-white mt-1">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 mt-2">
                     Customer Discovery & Proof
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
                     Every startup is a set of untested assumptions. Document interviews, prototype experiments, and survey data here.
                   </p>
                 </div>
 
                 <button
                   onClick={() => setShowModal(true)}
-                  className="px-5 py-3 rounded-xl bg-primary-600 hover:bg-primary-500 text-white text-xs font-semibold shadow-glow-sm transition-all flex items-center gap-2 flex-shrink-0"
+                  className="px-5 py-3 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold shadow-md shadow-primary-500/20 transition-all flex items-center gap-2 flex-shrink-0 cursor-pointer"
                 >
                   <PlusCircle className="w-4 h-4" />
                   <span>Record New Evidence</span>
@@ -192,18 +188,18 @@ export const ValidationPage = () => {
                     return (
                       <div
                         key={rec.id}
-                        className="glass-card rounded-2xl p-6 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between"
+                        className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all flex flex-col justify-between"
                       >
                         <div className="space-y-3">
                           {/* Header pill strip */}
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                              <div className="p-2 rounded-lg bg-surface-50 border border-slate-700 text-primary-400">
+                              <div className="p-2 rounded-lg bg-primary-50 border border-primary-200 text-primary-700">
                                 <Icon className="w-4 h-4" />
                               </div>
                               <div>
-                                <span className="text-xs font-bold text-slate-200 block">{rec.type}</span>
-                                <span className="text-[10px] text-slate-500 flex items-center gap-1">
+                                <span className="text-xs font-bold text-slate-900 block">{rec.type}</span>
+                                <span className="text-[10px] text-slate-500 flex items-center gap-1 font-medium">
                                   <Calendar className="w-3 h-3" />
                                   {rec.date}
                                 </span>
@@ -215,43 +211,43 @@ export const ValidationPage = () => {
                             </span>
                           </div>
 
-                          <h3 className="text-base font-bold font-display text-white">
+                          <h3 className="text-base font-bold font-display text-slate-900">
                             {rec.title}
                           </h3>
 
                           {/* Description & Result */}
                           <div className="space-y-2 text-xs">
-                            <div className="p-3 rounded-xl bg-surface-50 border border-slate-800">
-                              <strong className="text-slate-400 text-[10px] uppercase block mb-0.5">What was tested:</strong>
-                              <p className="text-slate-300 leading-relaxed">{rec.description}</p>
+                            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                              <strong className="text-slate-500 text-[10px] font-bold uppercase block mb-0.5">What was tested:</strong>
+                              <p className="text-slate-700 leading-relaxed font-medium">{rec.description}</p>
                             </div>
 
-                            <div className="p-3 rounded-xl bg-surface-50 border border-slate-800">
-                              <strong className="text-accent-cyan text-[10px] uppercase block mb-0.5">Key Finding / Result:</strong>
-                              <p className="text-white leading-relaxed">{rec.result}</p>
+                            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                              <strong className="text-cyan-700 text-[10px] font-bold uppercase block mb-0.5">Key Finding / Result:</strong>
+                              <p className="text-slate-900 font-semibold leading-relaxed">{rec.result}</p>
                             </div>
 
-                            <div className="p-3 rounded-xl bg-surface-50 border border-slate-800">
-                              <strong className="text-accent-emerald text-[10px] uppercase block mb-0.5">Concrete Proof / Quote:</strong>
-                              <p className="text-slate-300 italic leading-relaxed">"{rec.evidence}"</p>
+                            <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                              <strong className="text-emerald-700 text-[10px] font-bold uppercase block mb-0.5">Concrete Proof / Quote:</strong>
+                              <p className="text-slate-800 italic font-medium leading-relaxed">"{rec.evidence}"</p>
                             </div>
                           </div>
 
                           {rec.notes && (
-                            <p className="text-[11px] text-slate-400 italic">
-                              <strong className="not-italic text-slate-300">Notes: </strong>{rec.notes}
+                            <p className="text-[11px] text-slate-500 italic">
+                              <strong className="not-italic text-slate-700 font-semibold">Notes: </strong>{rec.notes}
                             </p>
                           )}
                         </div>
 
                         {/* Footer actions */}
-                        <div className="pt-4 mt-4 border-t border-slate-800/80 flex items-center justify-between">
-                          <span className="text-[10px] text-slate-500">
+                        <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+                          <span className="text-[10px] text-slate-500 font-medium">
                             Validated on {rec.date}
                           </span>
                           <button
                             onClick={() => handleDelete(rec.id)}
-                            className="p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-950/30 transition-colors"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                             title="Delete record"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -269,11 +265,11 @@ export const ValidationPage = () => {
 
           {/* CREATE RECORD MODAL */}
           {showModal && (
-            <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-              <div className="bg-surface-100 rounded-2xl border border-slate-700 p-6 max-w-xl w-full shadow-glow-md my-8">
-                <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
-                  <h3 className="text-base font-bold text-white font-display">Record Validation Evidence</h3>
-                  <button onClick={() => setShowModal(false)} className="text-slate-400 hover:text-white">
+            <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+              <div className="bg-white rounded-2xl border border-slate-200 p-6 max-w-xl w-full shadow-2xl my-8">
+                <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                  <h3 className="text-base font-bold text-slate-900 font-display">Record Validation Evidence</h3>
+                  <button onClick={() => setShowModal(false)} className="text-slate-400 hover:text-slate-700 cursor-pointer">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
@@ -281,11 +277,11 @@ export const ValidationPage = () => {
                 <form onSubmit={handleCreate} className="space-y-4">
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">Evidence Type *</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">Evidence Type *</label>
                       <select
                         value={vType}
                         onChange={(e) => setVType(e.target.value)}
-                        className="w-full px-3 py-2 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none"
+                        className="w-full px-3 py-2 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 shadow-sm"
                       >
                         <option value="Customer Interview">Customer Interview</option>
                         <option value="Survey Results">Survey Results</option>
@@ -297,71 +293,71 @@ export const ValidationPage = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">Date *</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">Date *</label>
                       <input
                         type="date"
                         required
                         value={vDate}
                         onChange={(e) => setVDate(e.target.value)}
-                        className="w-full px-3 py-2 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none"
+                        className="w-full px-3 py-2 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 shadow-sm"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Evidence Title *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">Evidence Title *</label>
                     <input
                       type="text"
                       required
                       value={vTitle}
                       onChange={(e) => setVTitle(e.target.value)}
                       placeholder="e.g. 5 Discovery calls with SMB agency owners in Bangalore"
-                      className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Description / What was tested *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">Description / What was tested *</label>
                     <textarea
                       rows={2}
                       required
                       value={vDesc}
                       onChange={(e) => setVDesc(e.target.value)}
                       placeholder="e.g. Tested willingness to pay ₹1,499/mo for automated GST reconciliation"
-                      className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Result / Findings *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">Result / Findings *</label>
                     <textarea
                       rows={2}
                       required
                       value={vResult}
                       onChange={(e) => setVResult(e.target.value)}
                       placeholder="e.g. 4 out of 5 confirmed they would switch immediately if bank statement import worked seamlessly"
-                      className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Concrete Evidence / Direct Quotes *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">Concrete Evidence / Direct Quotes *</label>
                     <textarea
                       rows={2}
                       required
                       value={vEvidence}
                       onChange={(e) => setVEvidence(e.target.value)}
                       placeholder='e.g. "I currently pay ₹5,000/mo to my accountant just for basic filing errors."'
-                      className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Strategic Decision</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">Strategic Decision</label>
                     <select
                       value={vDecision}
                       onChange={(e) => setVDecision(e.target.value)}
-                      className="w-full px-3 py-2 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none"
+                      className="w-full px-3 py-2 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 shadow-sm"
                     >
                       <option value="Persevere">Persevere (Hypothesis validated, proceed forward)</option>
                       <option value="Iterate">Iterate (Minor adjustments to pricing or messaging)</option>
@@ -369,17 +365,17 @@ export const ValidationPage = () => {
                     </select>
                   </div>
 
-                  <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
+                  <div className="flex justify-end gap-2 pt-3 border-t border-slate-100">
                     <button
                       type="button"
                       onClick={() => setShowModal(false)}
-                      className="px-4 py-2 rounded-xl bg-surface-50 text-slate-400 text-xs font-semibold hover:text-white"
+                      className="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="px-5 py-2 rounded-xl bg-primary-600 hover:bg-primary-500 text-white text-xs font-semibold shadow-glow-sm"
+                      className="px-5 py-2 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold shadow-md shadow-primary-500/20 cursor-pointer"
                     >
                       Save Evidence
                     </button>

@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
-  UserCheck,
-  User,
-  Mail,
-  Phone,
-  MapPin,
-  Briefcase,
   Save,
   CheckCircle2,
-  Building2,
-  Sparkles
+  Building2
 } from 'lucide-react';
 import { Header } from '../components/Header';
 import { Sidebar } from '../components/Sidebar';
@@ -60,7 +53,7 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-slate-50 flex text-slate-900">
       <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
       <div className="flex-1 lg:pl-64 flex flex-col min-w-0">
@@ -73,23 +66,23 @@ export const ProfilePage = () => {
         <main className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-4xl mx-auto w-full">
           
           {saved && (
-            <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4" />
+            <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2 font-medium shadow-sm">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
               <span>Profile updated successfully!</span>
             </div>
           )}
 
           {/* PROFILE FORM */}
-          <div className="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-glow-sm">
+          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
             
-            <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-800">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-primary-600 to-accent-cyan flex items-center justify-center font-display font-extrabold text-2xl text-white shadow-glow-sm">
-                {user?.full_name?.charAt(0) || 'F'}
+            <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-primary-600 to-indigo-600 flex items-center justify-center font-display font-extrabold text-2xl text-white shadow-md">
+                {user?.full_name?.charAt(0) || 'A'}
               </div>
               <div>
-                <h3 className="text-xl font-bold font-display text-white">{user?.full_name || 'Founder'}</h3>
-                <p className="text-xs text-slate-400 mt-0.5">{user?.email}</p>
-                <span className="inline-block mt-2 text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary-950 text-accent-cyan border border-primary-800">
+                <h3 className="text-xl font-bold font-display text-slate-900">{user?.full_name || 'Founder'}</h3>
+                <p className="text-xs text-slate-500 font-medium mt-0.5">{user?.email || 'founder@inovex.ai'}</p>
+                <span className="inline-block mt-2 text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-primary-50 text-primary-700 border border-primary-200">
                   {founderType} • {experienceLevel}
                 </span>
               </div>
@@ -98,11 +91,11 @@ export const ProfilePage = () => {
             <form onSubmit={handleSave} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Founder Type</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Founder Type</label>
                   <select
                     value={founderType}
                     onChange={(e) => setFounderType(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500"
+                    className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs font-medium rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                   >
                     <option value="Student Founder">Student Founder</option>
                     <option value="First-time Founder">First-time Founder</option>
@@ -112,11 +105,11 @@ export const ProfilePage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Experience Level</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Experience Level</label>
                   <select
                     value={experienceLevel}
                     onChange={(e) => setExperienceLevel(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500"
+                    className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs font-medium rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                   >
                     <option value="Beginner">Beginner (First startup venture)</option>
                     <option value="Intermediate">Intermediate (Prior project experience)</option>
@@ -127,44 +120,44 @@ export const ProfilePage = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Location / Base</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Location / Base</label>
                   <input
                     type="text"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="e.g. Bengaluru, India"
-                    className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500"
+                    className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 placeholder:text-slate-400 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Phone (Optional)</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Phone (Optional)</label>
                   <input
                     type="text"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 98765 43210"
-                    className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500"
+                    className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 placeholder:text-slate-400 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Founder Bio / Vision</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Founder Bio / Vision</label>
                 <textarea
                   rows={3}
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
                   placeholder="Tell INOVEX about your background and what fuels your startup mission..."
-                  className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500"
+                  className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 placeholder:text-slate-400 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                 />
               </div>
 
-              <div className="pt-4 border-t border-slate-800 flex justify-end">
+              <div className="pt-4 border-t border-slate-100 flex justify-end">
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-6 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-white text-xs font-semibold shadow-glow-sm flex items-center gap-2 transition-all disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold shadow-md shadow-primary-500/20 flex items-center gap-2 transition-all disabled:opacity-50 cursor-pointer"
                 >
                   <Save className="w-4 h-4" />
                   <span>{saving ? 'Saving...' : 'Save Profile'}</span>
@@ -176,13 +169,13 @@ export const ProfilePage = () => {
 
           {/* ACTIVE STARTUP INFO CARD */}
           {activeStartup && (
-            <div className="glass-card rounded-2xl p-6 border border-slate-800 space-y-3">
-              <div className="flex items-center gap-2 text-primary-400">
+            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-3">
+              <div className="flex items-center gap-2 text-primary-700">
                 <Building2 className="w-5 h-5" />
-                <h4 className="text-sm font-bold text-white">Active Startup: {activeStartup.name}</h4>
+                <h4 className="text-sm font-bold text-slate-900">Active Startup: {activeStartup.name}</h4>
               </div>
-              <p className="text-xs text-slate-400">
-                <strong>Industry: </strong>{activeStartup.industry} • <strong>Model: </strong>{activeStartup.business_model} • <strong>Budget: </strong>{activeStartup.available_budget}
+              <p className="text-xs text-slate-600 leading-relaxed">
+                <strong className="text-slate-800">Industry: </strong>{activeStartup.industry} • <strong className="text-slate-800">Model: </strong>{activeStartup.business_model} • <strong className="text-slate-800">Budget: </strong>{activeStartup.available_budget}
               </p>
             </div>
           )}

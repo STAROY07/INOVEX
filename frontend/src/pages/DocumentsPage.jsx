@@ -3,14 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import {
   Files,
   Sparkles,
-  PlusCircle,
-  FileText,
   Copy,
   Check,
   Trash2,
   Edit3,
   Save,
-  Download,
   X,
   Loader2
 } from 'lucide-react';
@@ -133,7 +130,7 @@ export const DocumentsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-slate-50 flex text-slate-900">
       <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
       <div className="flex-1 lg:pl-64 flex flex-col min-w-0">
@@ -158,24 +155,24 @@ export const DocumentsPage = () => {
           ) : (
             <>
               {/* TOP HEADER */}
-              <div className="rounded-2xl p-6 bg-gradient-to-r from-surface-100 via-surface-100 to-primary-950/40 border border-slate-800 shadow-glow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="rounded-2xl p-6 bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
-                  <span className="text-xs font-bold text-primary-400 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-primary-700 uppercase tracking-wider">
                     Asset Library
                   </span>
-                  <h2 className="text-2xl font-bold font-display text-white mt-1">
+                  <h2 className="text-2xl font-extrabold font-display text-slate-900 mt-1">
                     Startup Documents for {activeStartup.name}
                   </h2>
-                  <p className="text-xs text-slate-400 mt-1">
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1">
                     Exportable, markdown-formatted assets for partners, investors, and team members.
                   </p>
                 </div>
 
                 <button
                   onClick={() => setShowGenerateModal(true)}
-                  className="px-5 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-white text-xs font-semibold shadow-glow-sm transition-all flex items-center gap-2 flex-shrink-0"
+                  className="px-5 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold shadow-md shadow-primary-500/20 transition-all flex items-center gap-2 flex-shrink-0 cursor-pointer"
                 >
-                  <Sparkles className="w-4 h-4 text-accent-cyan" />
+                  <Sparkles className="w-4 h-4 text-white" />
                   <span>Generate New Document</span>
                 </button>
               </div>
@@ -185,7 +182,7 @@ export const DocumentsPage = () => {
                 
                 {/* Left: Document List */}
                 <div className="lg:col-span-4 space-y-2">
-                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider px-1 mb-3">
+                  <h3 className="text-xs font-bold text-slate-500 uppercase tracking-wider px-1 mb-3">
                     Generated Documents ({documents.length})
                   </h3>
 
@@ -202,13 +199,13 @@ export const DocumentsPage = () => {
                           }}
                           className={`p-3.5 rounded-xl border cursor-pointer transition-all flex items-start justify-between gap-2 ${
                             isSelected
-                              ? 'bg-primary-600/20 border-primary-500 text-white shadow-glow-sm'
-                              : 'bg-surface-50 border-slate-800 text-slate-300 hover:border-slate-700'
+                              ? 'bg-primary-50 border-primary-500 text-primary-900 shadow-sm font-semibold'
+                              : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                           }`}
                         >
                           <div className="min-w-0">
-                            <h4 className="text-xs font-bold truncate">{doc.title}</h4>
-                            <span className="text-[10px] text-slate-400 capitalize block mt-0.5">
+                            <h4 className="text-xs font-bold truncate text-slate-900">{doc.title}</h4>
+                            <span className="text-[10px] text-slate-500 capitalize block mt-0.5 font-medium">
                               {doc.doc_type.replace('_', ' ')}
                             </span>
                           </div>
@@ -217,7 +214,7 @@ export const DocumentsPage = () => {
                               e.stopPropagation();
                               handleDelete(doc.id);
                             }}
-                            className="text-slate-500 hover:text-rose-400 p-1"
+                            className="text-slate-400 hover:text-rose-600 p-1 cursor-pointer"
                             title="Delete"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -229,12 +226,12 @@ export const DocumentsPage = () => {
                 </div>
 
                 {/* Right: Document Viewer / Editor */}
-                <div className="lg:col-span-8 glass-panel rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+                <div className="lg:col-span-8 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
                   {selectedDoc ? (
                     <div>
                       {/* Doc Header Action Bar */}
-                      <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
-                        <h3 className="text-lg font-bold font-display text-white truncate">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
+                        <h3 className="text-lg font-bold font-display text-slate-900 truncate">
                           {selectedDoc.title}
                         </h3>
 
@@ -243,13 +240,13 @@ export const DocumentsPage = () => {
                             <>
                               <button
                                 onClick={() => setIsEditing(false)}
-                                className="px-3 py-1.5 rounded-lg bg-surface-50 text-slate-400 text-xs font-semibold hover:text-white"
+                                className="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 text-xs font-semibold hover:bg-slate-200 cursor-pointer"
                               >
                                 Cancel
                               </button>
                               <button
                                 onClick={handleSaveEdit}
-                                className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1"
+                                className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 shadow-sm cursor-pointer"
                               >
                                 <Save className="w-3.5 h-3.5" />
                                 Save
@@ -259,44 +256,41 @@ export const DocumentsPage = () => {
                             <>
                               <button
                                 onClick={() => setIsEditing(true)}
-                                className="p-2 rounded-lg bg-surface-50 hover:bg-surface-200 border border-slate-700 text-slate-300 text-xs font-medium transition-colors flex items-center gap-1"
-                                title="Edit Document"
+                                className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
+                                title="Edit document manually"
                               >
-                                <Edit3 className="w-3.5 h-3.5" />
-                                <span className="hidden sm:inline">Edit</span>
+                                <Edit3 className="w-4 h-4" />
                               </button>
                               <button
                                 onClick={handleCopy}
-                                className="p-2 rounded-lg bg-surface-50 hover:bg-surface-200 border border-slate-700 text-slate-300 text-xs font-medium transition-colors flex items-center gap-1"
+                                className="px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-300 text-slate-700 text-xs font-semibold transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer"
                                 title="Copy Markdown"
                               >
-                                {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                                <span className="hidden sm:inline">{copied ? 'Copied' : 'Copy'}</span>
+                                {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                                <span>{copied ? 'Copied' : 'Copy'}</span>
                               </button>
                             </>
                           )}
                         </div>
                       </div>
 
-                      {/* Content Area */}
+                      {/* Content Preview or Textarea */}
                       {isEditing ? (
                         <textarea
                           rows={16}
                           value={editedContent}
                           onChange={(e) => setEditedContent(e.target.value)}
-                          className="w-full p-4 bg-surface-50 text-white text-xs sm:text-sm rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500 font-mono leading-relaxed"
+                          className="w-full p-4 bg-slate-50 text-slate-900 text-xs sm:text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:bg-white leading-relaxed font-mono shadow-sm"
                         />
                       ) : (
-                        <div className="prose-custom text-xs sm:text-sm text-slate-300 leading-relaxed max-h-[600px] overflow-y-auto pr-2">
+                        <div className="prose-custom text-xs sm:text-sm text-slate-700 leading-relaxed max-h-[500px] overflow-y-auto pr-2">
                           <ReactMarkdown>{selectedDoc.content}</ReactMarkdown>
                         </div>
                       )}
                     </div>
                   ) : (
-                    <div className="flex flex-col items-center justify-center py-20 text-center text-slate-400">
-                      <Files className="w-12 h-12 text-slate-600 mb-3" />
-                      <p className="text-sm font-semibold text-white">Select a document to preview or edit</p>
-                      <p className="text-xs text-slate-500 mt-1">Or generate a new pitch deck, SWOT matrix, or marketing plan.</p>
+                    <div className="text-center py-20 text-slate-500 text-xs font-medium">
+                      Select a document from the left or generate a new one.
                     </div>
                   )}
                 </div>
@@ -306,59 +300,61 @@ export const DocumentsPage = () => {
             </>
           )}
 
-          {/* GENERATE MODAL */}
+          {/* GENERATE DOCUMENT MODAL */}
           {showGenerateModal && (
-            <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-              <div className="bg-surface-100 rounded-2xl border border-slate-700 p-6 max-w-lg w-full shadow-glow-md">
-                <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
-                  <h3 className="text-base font-bold text-white font-display">Generate Startup Document</h3>
-                  <button onClick={() => setShowGenerateModal(false)} className="text-slate-400 hover:text-white">
+            <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <div className="bg-white rounded-2xl border border-slate-200 p-6 max-w-lg w-full shadow-2xl">
+                <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                  <h3 className="text-base font-bold text-slate-900 font-display">Generate Business Document</h3>
+                  <button onClick={() => setShowGenerateModal(false)} className="text-slate-400 hover:text-slate-700 cursor-pointer">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
 
                 <form onSubmit={handleGenerate} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Select Document Type *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">Document Type</label>
                     <select
                       value={docType}
                       onChange={(e) => setDocType(e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500"
+                      className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs font-medium rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 shadow-sm"
                     >
-                      {docTypesList.map(dt => (
-                        <option key={dt.type} value={dt.type}>{dt.label}</option>
+                      {docTypesList.map((dt) => (
+                        <option key={dt.type} value={dt.type}>
+                          {dt.label}
+                        </option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Custom Focus / Context (Optional)</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">Custom Instructions (Optional)</label>
                     <textarea
                       rows={3}
                       value={customPrompt}
                       onChange={(e) => setCustomPrompt(e.target.value)}
-                      placeholder="e.g. Highlight our UPI integration and focus on Tier-2 small business pain points..."
-                      className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500"
+                      placeholder="e.g. Focus on B2B SaaS unit economics and India market growth potential..."
+                      className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 placeholder:text-slate-400 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                     />
                   </div>
 
-                  <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
+                  <div className="flex justify-end gap-2 pt-3 border-t border-slate-100">
                     <button
                       type="button"
                       onClick={() => setShowGenerateModal(false)}
-                      className="px-4 py-2 rounded-xl bg-surface-50 text-slate-400 text-xs font-semibold hover:text-white"
+                      className="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={generating}
-                      className="px-5 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-white text-xs font-semibold shadow-glow-sm flex items-center gap-1.5 disabled:opacity-50"
+                      className="px-5 py-2 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold shadow-md shadow-primary-500/20 flex items-center gap-1.5 transition-all disabled:opacity-50 cursor-pointer"
                     >
                       {generating ? (
                         <>
                           <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                          <span>Generating with AI...</span>
+                          <span>Generating...</span>
                         </>
                       ) : (
                         <>

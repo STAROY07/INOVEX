@@ -2,15 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   CheckSquare,
-  Sparkles,
   PlusCircle,
   Clock,
   CheckCircle2,
-  ListOrdered,
   Target,
   RefreshCw,
-  X,
-  AlertCircle
+  X
 } from 'lucide-react';
 import { useStartup } from '../context/StartupContext';
 import { Header } from '../components/Header';
@@ -115,7 +112,7 @@ export const NextActionsPage = () => {
   const completedCount = actions.filter(a => a.status === 'completed').length;
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-slate-50 flex text-slate-900">
       <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
       <div className="flex-1 lg:pl-64 flex flex-col min-w-0">
@@ -140,20 +137,20 @@ export const NextActionsPage = () => {
           ) : (
             <>
               {/* TOP BANNER */}
-              <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-surface-100 via-surface-100 to-primary-950/40 border border-slate-800 shadow-glow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="rounded-2xl p-6 sm:p-8 bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-accent-cyan uppercase tracking-wider">
+                    <span className="text-xs font-bold text-cyan-700 uppercase tracking-wider">
                       Execution Queue
                     </span>
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                       {completedCount} / {actions.length} Completed
                     </span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-display text-white mt-1">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 mt-2">
                     What to do next for {activeStartup.name}
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
                     Focus strictly on these high-conviction tasks before adding more features or starting random marketing.
                   </p>
                 </div>
@@ -161,7 +158,7 @@ export const NextActionsPage = () => {
                 <div className="flex items-center gap-2.5">
                   <button
                     onClick={() => setShowAddModal(true)}
-                    className="px-4 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-white text-xs font-semibold shadow-glow-sm transition-all flex items-center gap-1.5"
+                    className="px-4 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold shadow-md shadow-primary-500/20 transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <PlusCircle className="w-4 h-4" />
                     <span>Add Custom Action</span>
@@ -170,10 +167,10 @@ export const NextActionsPage = () => {
                   <button
                     onClick={handleRegenerate}
                     disabled={regenerating}
-                    className="p-2.5 rounded-xl bg-surface-50 hover:bg-surface-200 border border-slate-700 text-slate-300 transition-colors"
+                    className="p-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-300 text-slate-700 shadow-sm transition-colors cursor-pointer"
                     title="Generate New Action Recommendations"
                   >
-                    <RefreshCw className={`w-4 h-4 ${regenerating ? 'animate-spin text-primary-400' : ''}`} />
+                    <RefreshCw className={`w-4 h-4 ${regenerating ? 'animate-spin text-primary-600' : ''}`} />
                   </button>
                 </div>
               </div>
@@ -185,10 +182,10 @@ export const NextActionsPage = () => {
                   return (
                     <div
                       key={act.id}
-                      className={`glass-card rounded-2xl p-6 border transition-all ${
+                      className={`bg-white rounded-2xl p-6 border transition-all ${
                         isDone
-                          ? 'border-emerald-500/30 bg-surface-100/30 opacity-75'
-                          : 'border-slate-800 hover:border-slate-700 shadow-glow-sm'
+                          ? 'border-emerald-200 bg-emerald-50/20'
+                          : 'border-slate-200 hover:border-slate-300 shadow-sm'
                       }`}
                     >
                       <div className="flex items-start gap-4">
@@ -196,48 +193,48 @@ export const NextActionsPage = () => {
                         {/* Checkbox */}
                         <button
                           onClick={() => handleToggle(act.id, act.status)}
-                          className={`w-7 h-7 rounded-xl border flex items-center justify-center mt-1 flex-shrink-0 transition-all ${
+                          className={`w-7 h-7 rounded-xl border flex items-center justify-center mt-1 flex-shrink-0 transition-all cursor-pointer ${
                             isDone
-                              ? 'bg-emerald-500 border-emerald-400 text-white shadow-glow-sm'
-                              : 'border-slate-600 hover:border-primary-500 bg-surface-50'
+                              ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm'
+                              : 'border-slate-300 hover:border-primary-500 bg-white'
                           }`}
                         >
-                          {isDone ? <CheckCircle2 className="w-5 h-5" /> : <span className="text-xs font-bold text-slate-400">{index + 1}</span>}
+                          {isDone ? <CheckCircle2 className="w-5 h-5" /> : <span className="text-xs font-bold text-slate-500">{index + 1}</span>}
                         </button>
 
                         <div className="min-w-0 flex-1 space-y-3">
                           
                           {/* Title & Badges */}
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                            <h3 className={`text-base font-bold font-display ${isDone ? 'line-through text-slate-400' : 'text-white'}`}>
+                            <h3 className={`text-base font-bold font-display ${isDone ? 'line-through text-slate-400' : 'text-slate-900'}`}>
                               {act.title}
                             </h3>
                             <div className="flex items-center gap-2 flex-shrink-0">
-                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary-950 text-accent-cyan border border-primary-800">
+                              <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-primary-50 text-primary-700 border border-primary-200">
                                 {act.priority} Priority
                               </span>
-                              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-surface-50 text-slate-400 border border-slate-700">
+                              <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                                 {act.category}
                               </span>
                             </div>
                           </div>
 
                           {/* Why it matters */}
-                          <div className="p-3.5 rounded-xl bg-surface-50/80 border border-slate-800/80 text-xs">
-                            <strong className="text-primary-400 font-semibold block mb-0.5">Why this matters:</strong>
-                            <p className="text-slate-300 leading-relaxed">{act.why_it_matters}</p>
+                          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+                            <strong className="text-primary-700 font-bold block mb-0.5">Why this matters:</strong>
+                            <p className="text-slate-700 leading-relaxed font-medium">{act.why_it_matters}</p>
                           </div>
 
                           {/* Step by Step */}
                           {act.step_by_step && act.step_by_step.length > 0 && (
                             <div>
-                              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
+                              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">
                                 Step-by-Step Instructions
                               </span>
                               <ol className="space-y-1.5 pl-1">
                                 {act.step_by_step.map((step, i) => (
-                                  <li key={i} className="text-xs text-slate-300 flex items-start gap-2">
-                                    <span className="w-4 h-4 rounded-full bg-surface-50 border border-slate-700 text-slate-400 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                                  <li key={i} className="text-xs text-slate-700 flex items-start gap-2">
+                                    <span className="w-4 h-4 rounded-full bg-slate-100 border border-slate-300 text-slate-700 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
                                       {i + 1}
                                     </span>
                                     <span>{step}</span>
@@ -248,14 +245,14 @@ export const NextActionsPage = () => {
                           )}
 
                           {/* Expected Deliverable */}
-                          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-t border-slate-800/60 text-xs">
-                            <div className="flex items-center gap-1.5 text-slate-400">
-                              <Target className="w-3.5 h-3.5 text-accent-emerald" />
-                              <span>Deliverable: <strong className="text-slate-200">{act.expected_outcome}</strong></span>
+                          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-t border-slate-100 text-xs">
+                            <div className="flex items-center gap-1.5 text-slate-600">
+                              <Target className="w-3.5 h-3.5 text-emerald-600" />
+                              <span>Deliverable: <strong className="text-slate-900">{act.expected_outcome}</strong></span>
                             </div>
 
-                            <div className="flex items-center gap-1 text-slate-500 text-[11px]">
-                              <Clock className="w-3.5 h-3.5" />
+                            <div className="flex items-center gap-1 text-slate-500 text-[11px] font-medium">
+                              <Clock className="w-3.5 h-3.5 text-slate-400" />
                               <span>Est: {act.estimated_time}</span>
                             </div>
                           </div>
@@ -273,57 +270,57 @@ export const NextActionsPage = () => {
 
           {/* ADD CUSTOM ACTION MODAL */}
           {showAddModal && (
-            <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-              <div className="bg-surface-100 rounded-2xl border border-slate-700 p-6 max-w-lg w-full shadow-glow-md">
-                <div className="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
-                  <h3 className="text-base font-bold text-white font-display">Add Custom Founder Action</h3>
-                  <button onClick={() => setShowAddModal(false)} className="text-slate-400 hover:text-white">
+            <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <div className="bg-white rounded-2xl border border-slate-200 p-6 max-w-lg w-full shadow-2xl">
+                <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                  <h3 className="text-base font-bold text-slate-900 font-display">Add Custom Founder Action</h3>
+                  <button onClick={() => setShowAddModal(false)} className="text-slate-400 hover:text-slate-700 cursor-pointer">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
 
                 <form onSubmit={handleCreateCustom} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Task Title *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">Task Title *</label>
                     <input
                       type="text"
                       required
                       value={newTitle}
                       onChange={(e) => setNewTitle(e.target.value)}
                       placeholder="e.g. Schedule 5 user test calls"
-                      className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500"
+                      className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Why it matters</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">Why it matters</label>
                     <textarea
                       rows={2}
                       value={newWhy}
                       onChange={(e) => setNewWhy(e.target.value)}
                       placeholder="Explain the strategic rationale for doing this now"
-                      className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500"
+                      className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Expected Outcome</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">Expected Outcome</label>
                     <input
                       type="text"
                       value={newOutcome}
                       onChange={(e) => setNewOutcome(e.target.value)}
                       placeholder="e.g. 5 completed feedback logs"
-                      className="w-full px-3.5 py-2.5 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500"
+                      className="w-full px-3.5 py-2.5 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-100 shadow-sm"
                     />
                   </div>
 
                   <div className="grid grid-cols-3 gap-3">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">Priority</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">Priority</label>
                       <select
                         value={newPriority}
                         onChange={(e) => setNewPriority(e.target.value)}
-                        className="w-full px-2.5 py-2 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none"
+                        className="w-full px-2.5 py-2 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 shadow-sm"
                       >
                         <option value="Urgent">Urgent</option>
                         <option value="High">High</option>
@@ -332,23 +329,22 @@ export const NextActionsPage = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">Est. Time</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">Est. Time</label>
                       <input
                         type="text"
                         value={newTime}
                         onChange={(e) => setNewTime(e.target.value)}
                         placeholder="e.g. 2 hours"
-                        className="w-full px-2.5 py-2 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none"
-                      >
-                      </input>
+                        className="w-full px-2.5 py-2 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 shadow-sm"
+                      />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">Category</label>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1.5">Category</label>
                       <select
                         value={newCategory}
                         onChange={(e) => setNewCategory(e.target.value)}
-                        className="w-full px-2.5 py-2 bg-surface-50 text-white text-xs rounded-xl border border-slate-700 focus:outline-none"
+                        className="w-full px-2.5 py-2 bg-white text-slate-900 text-xs rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 shadow-sm"
                       >
                         <option value="Validation">Validation</option>
                         <option value="Product">Product</option>
@@ -359,17 +355,17 @@ export const NextActionsPage = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
+                  <div className="flex justify-end gap-2 pt-3 border-t border-slate-100">
                     <button
                       type="button"
                       onClick={() => setShowAddModal(false)}
-                      className="px-4 py-2 rounded-xl bg-surface-50 text-slate-400 text-xs font-semibold hover:text-white"
+                      className="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold hover:bg-slate-200 cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="px-5 py-2 rounded-xl bg-primary-600 hover:bg-primary-500 text-white text-xs font-semibold shadow-glow-sm"
+                      className="px-5 py-2 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold shadow-md shadow-primary-500/20 cursor-pointer"
                     >
                       Save Action
                     </button>

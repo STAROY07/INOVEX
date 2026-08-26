@@ -6,11 +6,7 @@ import {
   Clock,
   ExternalLink,
   ChevronDown,
-  ChevronUp,
-  Sparkles,
-  ArrowRight,
-  ShieldCheck,
-  Award
+  ChevronUp
 } from 'lucide-react';
 import { useStartup } from '../context/StartupContext';
 import { Header } from '../components/Header';
@@ -99,7 +95,7 @@ export const RoadmapPage = () => {
   const completedStagesCount = stages.filter(s => s.status === 'completed').length;
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-slate-50 flex text-slate-900">
       <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
 
       <div className="flex-1 lg:pl-64 flex flex-col min-w-0">
@@ -124,36 +120,36 @@ export const RoadmapPage = () => {
           ) : (
             <>
               {/* TOP ROADMAP OVERVIEW CARD */}
-              <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-surface-100 via-surface-100 to-primary-950/40 border border-slate-800 shadow-glow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div className="rounded-2xl p-6 sm:p-8 bg-white border border-slate-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-primary-400 uppercase tracking-wider">
+                    <span className="text-xs font-bold text-primary-700 uppercase tracking-wider">
                       Structured Founder Journey
                     </span>
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                       {completedStagesCount} / 11 Stages Completed
                     </span>
                   </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-display text-white mt-1">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 mt-2">
                     {activeStartup.name} Execution Plan
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
+                  <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
                     Follow the sequential gates below. Mark tasks in progress or completed to unlock subsequent stage gates.
                   </p>
                 </div>
 
-                <div className="w-full md:w-64 flex-shrink-0 bg-surface-50 p-4 rounded-xl border border-slate-800">
+                <div className="w-full md:w-64 flex-shrink-0 bg-slate-50 p-4 rounded-xl border border-slate-200">
                   <div className="flex items-center justify-between text-xs font-bold mb-2">
-                    <span className="text-slate-300">Overall Progress</span>
-                    <span className="text-accent-cyan font-extrabold">{percent}%</span>
+                    <span className="text-slate-700">Overall Progress</span>
+                    <span className="text-primary-700 font-extrabold">{percent}%</span>
                   </div>
-                  <div className="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                  <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
                     <div
-                      className="bg-gradient-to-r from-primary-500 to-accent-cyan h-full rounded-full transition-all duration-500"
+                      className="bg-primary-600 h-full rounded-full transition-all duration-500"
                       style={{ width: `${percent}%` }}
                     />
                   </div>
-                  <p className="text-[10px] text-slate-400 mt-2 text-right">
+                  <p className="text-[10px] text-slate-500 font-medium mt-2 text-right">
                     {completedTasks} of {totalTasks} tasks complete
                   </p>
                 </div>
@@ -161,7 +157,7 @@ export const RoadmapPage = () => {
 
               {/* 11 STAGES TIMELINE */}
               <div className="space-y-4">
-                {stages.map((stage, idx) => {
+                {stages.map((stage) => {
                   const isExpanded = expandedStage === stage.id;
                   const isDone = stage.status === 'completed';
                   const isCurrent = stage.status === 'in_progress';
@@ -171,86 +167,86 @@ export const RoadmapPage = () => {
                   return (
                     <div
                       key={stage.id}
-                      className={`glass-card rounded-2xl border transition-all overflow-hidden ${
+                      className={`bg-white rounded-2xl border transition-all overflow-hidden ${
                         isCurrent
-                          ? 'border-primary-500/60 shadow-glow-sm'
+                          ? 'border-primary-500 shadow-md ring-1 ring-primary-200'
                           : isDone
-                          ? 'border-emerald-500/40 bg-surface-100/40'
-                          : 'border-slate-800/80 hover:border-slate-700'
+                          ? 'border-emerald-300 bg-emerald-50/20'
+                          : 'border-slate-200 shadow-sm hover:border-slate-300'
                       }`}
                     >
                       {/* Stage Header Accordion Toggle */}
                       <div
                         onClick={() => toggleExpand(stage.id)}
-                        className="p-5 flex items-center justify-between cursor-pointer hover:bg-surface-50/50 transition-colors"
+                        className="p-5 flex items-center justify-between cursor-pointer hover:bg-slate-50/80 transition-colors"
                       >
                         <div className="flex items-center gap-4 min-w-0">
                           <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-display font-black text-sm flex-shrink-0 ${
                             isDone
-                              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                              ? 'bg-emerald-100 text-emerald-700 border border-emerald-300'
                               : isCurrent
-                              ? 'bg-primary-600 text-white shadow-glow-sm'
-                              : 'bg-surface-50 text-slate-400 border border-slate-700'
+                              ? 'bg-primary-600 text-white shadow-sm'
+                              : 'bg-slate-100 text-slate-600 border border-slate-200'
                           }`}>
                             {isDone ? <CheckCircle2 className="w-5 h-5" /> : `0${stage.stage_order}`}
                           </div>
 
                           <div className="min-w-0">
                             <div className="flex items-center gap-2">
-                              <h3 className="text-base font-bold font-display text-white truncate">
+                              <h3 className="text-base font-bold font-display text-slate-900 truncate">
                                 {stage.stage_name}
                               </h3>
                               <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
                                 isDone
-                                  ? 'bg-emerald-950 text-emerald-400 border-emerald-800/50'
+                                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
                                   : isCurrent
-                                  ? 'bg-primary-950 text-accent-cyan border-primary-800/50'
-                                  : 'bg-slate-900 text-slate-400 border-slate-800'
+                                  ? 'bg-primary-50 text-primary-700 border-primary-200'
+                                  : 'bg-slate-100 text-slate-600 border-slate-200'
                               }`}>
                                 {isDone ? 'Completed' : isCurrent ? 'Active Stage' : 'Up Next'}
                               </span>
                             </div>
-                            <p className="text-xs text-slate-400 mt-0.5 truncate max-w-xl">
+                            <p className="text-xs text-slate-600 mt-0.5 truncate max-w-xl">
                               {stage.objective}
                             </p>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-4 flex-shrink-0">
-                          <span className="text-xs text-slate-400 hidden sm:inline">
+                          <span className="text-xs text-slate-500 font-medium hidden sm:inline">
                             {stageDoneTasks}/{stageTasksCount} Tasks
                           </span>
                           {isExpanded ? (
-                            <ChevronUp className="w-5 h-5 text-slate-400" />
+                            <ChevronUp className="w-5 h-5 text-slate-500" />
                           ) : (
-                            <ChevronDown className="w-5 h-5 text-slate-400" />
+                            <ChevronDown className="w-5 h-5 text-slate-500" />
                           )}
                         </div>
                       </div>
 
                       {/* Stage Body Content */}
                       {isExpanded && (
-                        <div className="px-5 pb-6 pt-2 border-t border-slate-800/80 bg-surface-100/30 space-y-4">
+                        <div className="px-5 pb-6 pt-2 border-t border-slate-100 bg-slate-50/50 space-y-4">
                           
                           {/* Objective & Expected Outcome Strip */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-surface-50 p-4 rounded-xl border border-slate-800 text-xs">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-white p-4 rounded-xl border border-slate-200 text-xs shadow-sm">
                             <div>
-                              <strong className="text-primary-400 font-bold uppercase tracking-wider text-[10px] block mb-1">
+                              <strong className="text-primary-700 font-bold uppercase tracking-wider text-[10px] block mb-1">
                                 Stage Objective
                               </strong>
-                              <p className="text-slate-200">{stage.objective}</p>
+                              <p className="text-slate-800 font-medium">{stage.objective}</p>
                             </div>
                             <div>
-                              <strong className="text-accent-emerald font-bold uppercase tracking-wider text-[10px] block mb-1">
+                              <strong className="text-emerald-700 font-bold uppercase tracking-wider text-[10px] block mb-1">
                                 Expected Deliverable / Outcome
                               </strong>
-                              <p className="text-slate-200">{stage.expected_outcome}</p>
+                              <p className="text-slate-800 font-medium">{stage.expected_outcome}</p>
                             </div>
                           </div>
 
                           {/* Tasks List */}
                           <div className="space-y-3">
-                            <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                            <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
                               Action Items for this Stage
                             </h4>
 
@@ -263,35 +259,35 @@ export const RoadmapPage = () => {
                                   key={task.id}
                                   className={`p-4 rounded-xl border transition-all ${
                                     isTaskDone
-                                      ? 'bg-surface-50/50 border-emerald-500/30'
+                                      ? 'bg-emerald-50/40 border-emerald-200'
                                       : isTaskActive
-                                      ? 'bg-surface-50 border-primary-500/50 shadow-sm'
-                                      : 'bg-surface-50 border-slate-800 hover:border-slate-700'
+                                      ? 'bg-white border-primary-300 shadow-sm'
+                                      : 'bg-white border-slate-200 hover:border-slate-300'
                                   }`}
                                 >
                                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                                     <div className="space-y-1">
-                                      <h5 className={`text-sm font-bold ${isTaskDone ? 'line-through text-slate-400' : 'text-white'}`}>
+                                      <h5 className={`text-sm font-bold ${isTaskDone ? 'line-through text-slate-400' : 'text-slate-900'}`}>
                                         {task.title}
                                       </h5>
                                       {task.description && (
-                                        <p className="text-xs text-slate-300 leading-relaxed">
+                                        <p className="text-xs text-slate-600 leading-relaxed">
                                           {task.description}
                                         </p>
                                       )}
                                       {task.why_it_matters && (
-                                        <p className="text-[11px] text-slate-400 italic">
-                                          <strong className="text-primary-400 not-italic">Why it matters: </strong>
+                                        <p className="text-[11px] text-slate-500 italic">
+                                          <strong className="text-primary-700 not-italic font-bold">Why it matters: </strong>
                                           {task.why_it_matters}
                                         </p>
                                       )}
                                       <div className="flex items-center gap-3 pt-1 text-[10px] text-slate-500">
-                                        <span className="flex items-center gap-1">
-                                          <Clock className="w-3 h-3" />
+                                        <span className="flex items-center gap-1 font-medium">
+                                          <Clock className="w-3 h-3 text-slate-400" />
                                           Est: {task.estimated_time}
                                         </span>
                                         <span>•</span>
-                                        <span className="text-primary-400 font-semibold">{task.priority} Priority</span>
+                                        <span className="text-primary-700 font-bold">{task.priority} Priority</span>
                                       </div>
                                     </div>
 
@@ -303,10 +299,10 @@ export const RoadmapPage = () => {
                                         onChange={(e) => handleUpdateTaskStatus(task.id, e.target.value)}
                                         className={`text-xs font-semibold rounded-lg px-2.5 py-1.5 border focus:outline-none cursor-pointer ${
                                           isTaskDone
-                                            ? 'bg-emerald-950 text-emerald-400 border-emerald-800'
+                                            ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
                                             : isTaskActive
-                                            ? 'bg-primary-950 text-accent-cyan border-primary-800'
-                                            : 'bg-surface-100 text-slate-300 border-slate-700'
+                                            ? 'bg-primary-50 text-primary-800 border-primary-300'
+                                            : 'bg-white text-slate-700 border-slate-300 shadow-sm'
                                         }`}
                                       >
                                         <option value="not_started">Not Started</option>
@@ -318,15 +314,15 @@ export const RoadmapPage = () => {
 
                                   {/* Resources Links */}
                                   {task.resources && task.resources.length > 0 && (
-                                    <div className="mt-3 pt-2 border-t border-slate-800 flex items-center gap-2 text-xs">
-                                      <span className="text-[10px] text-slate-500 uppercase font-semibold">Guides:</span>
+                                    <div className="mt-3 pt-2 border-t border-slate-100 flex items-center gap-2 text-xs">
+                                      <span className="text-[10px] text-slate-500 uppercase font-bold">Guides:</span>
                                       {task.resources.map((res, i) => (
                                         <a
                                           key={i}
                                           href={res.url}
                                           target="_blank"
                                           rel="noreferrer"
-                                          className="text-primary-400 hover:text-primary-300 text-xs inline-flex items-center gap-1 underline"
+                                          className="text-primary-600 hover:text-primary-700 font-semibold text-xs inline-flex items-center gap-1 underline"
                                         >
                                           {res.name}
                                           <ExternalLink className="w-3 h-3" />

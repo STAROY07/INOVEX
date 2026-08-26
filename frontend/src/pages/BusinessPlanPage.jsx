@@ -8,11 +8,7 @@ import {
   Printer,
   Check,
   Edit3,
-  Save,
-  ChevronDown,
-  ChevronUp,
-  Download,
-  AlertCircle
+  Save
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { useStartup } from '../context/StartupContext';
@@ -129,7 +125,7 @@ export const BusinessPlanPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex print:bg-white print:text-black">
+    <div className="min-h-screen bg-slate-50 flex text-slate-900 print:bg-white print:text-black">
       <div className="print:hidden">
         <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       </div>
@@ -158,17 +154,17 @@ export const BusinessPlanPage = () => {
           ) : (
             <>
               {/* TOP ACTIONS BAR */}
-              <div className="rounded-2xl p-6 bg-gradient-to-r from-surface-100 via-surface-100 to-primary-950/40 border border-slate-800 shadow-glow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 print:hidden">
+              <div className="rounded-2xl p-6 bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 print:hidden">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                    <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">
                       Investor-Grade Documentation
                     </span>
-                    <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                       16 Comprehensive Sections
                     </span>
                   </div>
-                  <h2 className="text-2xl font-bold font-display text-white mt-1">
+                  <h2 className="text-2xl font-extrabold font-display text-slate-900 mt-2">
                     {activeStartup.name} Business Plan
                   </h2>
                 </div>
@@ -176,15 +172,15 @@ export const BusinessPlanPage = () => {
                 <div className="flex items-center gap-2.5">
                   <button
                     onClick={handleCopyFullPlan}
-                    className="px-4 py-2.5 rounded-xl bg-surface-50 hover:bg-surface-200 border border-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center gap-1.5"
+                    className="px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-300 text-slate-700 text-xs font-bold shadow-sm transition-all flex items-center gap-1.5 cursor-pointer"
                   >
-                    {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                    {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
                     <span>{copied ? 'Copied Full Plan!' : 'Copy Markdown'}</span>
                   </button>
 
                   <button
                     onClick={handlePrint}
-                    className="px-4 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-white text-xs font-semibold shadow-glow-sm transition-all flex items-center gap-1.5"
+                    className="px-4 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-bold shadow-md shadow-primary-500/20 transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <Printer className="w-4 h-4" />
                     <span>Print / Export PDF</span>
@@ -193,8 +189,8 @@ export const BusinessPlanPage = () => {
               </div>
 
               {saveSuccess && (
-                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2">
-                  <Check className="w-4 h-4" />
+                <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2 font-medium shadow-sm">
+                  <Check className="w-4 h-4 text-emerald-600" />
                   <span>Section saved successfully to database!</span>
                 </div>
               )}
@@ -209,10 +205,10 @@ export const BusinessPlanPage = () => {
                   return (
                     <div
                       key={sec.key}
-                      className="glass-card rounded-2xl p-6 border border-slate-800 hover:border-slate-700/80 transition-all print:border-b print:rounded-none print:shadow-none print:p-4 print:mb-4"
+                      className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-slate-300 transition-all print:border-b print:rounded-none print:shadow-none print:p-4 print:mb-4"
                     >
-                      <div className="flex items-center justify-between border-b border-slate-800/80 pb-3 mb-4 print:border-b-2">
-                        <h3 className="text-base font-bold font-display text-white print:text-black">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4 print:border-b-2">
+                        <h3 className="text-base font-bold font-display text-slate-900 print:text-black">
                           {sec.title}
                         </h3>
 
@@ -221,13 +217,13 @@ export const BusinessPlanPage = () => {
                             <>
                               <button
                                 onClick={() => setEditingSection(null)}
-                                className="px-3 py-1 text-xs text-slate-400 hover:text-white"
+                                className="px-3 py-1 text-xs text-slate-500 hover:text-slate-900 font-semibold cursor-pointer"
                               >
                                 Cancel
                               </button>
                               <button
                                 onClick={() => handleSaveSection(sec.key)}
-                                className="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1"
+                                className="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 cursor-pointer"
                               >
                                 <Save className="w-3.5 h-3.5" />
                                 Save
@@ -237,7 +233,7 @@ export const BusinessPlanPage = () => {
                             <>
                               <button
                                 onClick={() => handleStartEdit(sec.key)}
-                                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-surface-50 transition-colors"
+                                className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
                                 title="Edit section manually"
                               >
                                 <Edit3 className="w-4 h-4" />
@@ -245,10 +241,10 @@ export const BusinessPlanPage = () => {
                               <button
                                 onClick={() => handleRegenerateSection(sec.key)}
                                 disabled={isRegenerating}
-                                className="p-1.5 rounded-lg text-slate-400 hover:text-accent-cyan hover:bg-surface-50 transition-colors disabled:opacity-50"
+                                className="p-1.5 rounded-lg text-primary-600 hover:text-primary-700 hover:bg-primary-50 transition-colors disabled:opacity-50 cursor-pointer"
                                 title="Regenerate with AI"
                               >
-                                <Sparkles className={`w-4 h-4 ${isRegenerating ? 'animate-spin text-accent-cyan' : ''}`} />
+                                <Sparkles className={`w-4 h-4 ${isRegenerating ? 'animate-spin text-primary-600' : ''}`} />
                               </button>
                             </>
                           )}
@@ -260,15 +256,15 @@ export const BusinessPlanPage = () => {
                           rows={6}
                           value={editedText}
                           onChange={(e) => setEditedText(e.target.value)}
-                          className="w-full p-4 bg-surface-50 text-white text-xs sm:text-sm rounded-xl border border-slate-700 focus:outline-none focus:border-primary-500 leading-relaxed font-mono"
+                          className="w-full p-4 bg-slate-50 text-slate-900 text-xs sm:text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-primary-600 focus:bg-white leading-relaxed font-mono shadow-sm"
                         />
                       ) : isRegenerating ? (
-                        <div className="p-8 text-center bg-surface-50 rounded-xl border border-slate-800 flex items-center justify-center gap-2 text-xs text-slate-300">
-                          <RefreshCw className="w-4 h-4 animate-spin text-accent-cyan" />
+                        <div className="p-8 text-center bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-center gap-2 text-xs text-slate-700 font-medium">
+                          <RefreshCw className="w-4 h-4 animate-spin text-primary-600" />
                           <span>AI is refining and regenerating {sec.title}...</span>
                         </div>
                       ) : (
-                        <div className="prose-custom text-xs sm:text-sm text-slate-300 leading-relaxed print:text-black">
+                        <div className="prose-custom text-xs sm:text-sm text-slate-700 leading-relaxed print:text-black">
                           <ReactMarkdown>{content}</ReactMarkdown>
                         </div>
                       )}
