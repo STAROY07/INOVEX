@@ -155,7 +155,7 @@ export const OnboardingPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-slate-100 flex flex-col selection:bg-primary-500 selection:text-white">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-primary-500 selection:text-white">
       <Navbar />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
@@ -163,10 +163,10 @@ export const OnboardingPage = () => {
         {/* Top Header & Example Prefill */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
           <div>
-            <span className="text-xs font-bold text-primary-400 uppercase tracking-wider">
+            <span className="text-xs font-bold text-primary-700 uppercase tracking-wider">
               Step {currentStep} of 6
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-white mt-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold font-display text-slate-900 mt-1">
               Tell INOVEX about your startup idea
             </h1>
           </div>
@@ -174,9 +174,9 @@ export const OnboardingPage = () => {
           <button
             type="button"
             onClick={fillExampleIdea}
-            className="text-xs font-medium px-3 py-2 rounded-xl bg-surface-50 hover:bg-surface-100 border border-slate-700 text-slate-300 hover:text-white transition-colors flex items-center gap-1.5"
+            className="text-xs font-semibold px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 shadow-sm transition-colors flex items-center gap-1.5 cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-accent-cyan" />
+            <Sparkles className="w-3.5 h-3.5 text-primary-600" />
             <span>Prefill Example Idea</span>
           </button>
         </div>
@@ -192,14 +192,14 @@ export const OnboardingPage = () => {
                 key={s.num}
                 className={`p-3 rounded-xl border flex flex-col items-center text-center transition-all ${
                   isCurrent
-                    ? 'bg-primary-600/20 border-primary-500/60 text-white shadow-glow-sm'
+                    ? 'bg-primary-50 border-primary-500 text-primary-800 shadow-sm font-bold'
                     : isCompleted
-                    ? 'bg-surface-50 border-emerald-500/40 text-emerald-400'
-                    : 'bg-surface-100/40 border-slate-800 text-slate-500'
+                    ? 'bg-emerald-50 border-emerald-300 text-emerald-700 font-semibold'
+                    : 'bg-white border-slate-200 text-slate-400'
                 }`}
               >
                 <div className="flex items-center gap-1 mb-1">
-                  {isCompleted ? <CheckCircle2 className="w-4 h-4 text-emerald-400" /> : <Icon className="w-4 h-4" />}
+                  {isCompleted ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <Icon className="w-4 h-4" />}
                 </div>
                 <span className="text-[11px] font-semibold truncate hidden sm:inline">{s.label}</span>
               </div>
@@ -209,22 +209,22 @@ export const OnboardingPage = () => {
 
         {/* Error Alert */}
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs">
+          <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs">
             {error}
           </div>
         )}
 
         {/* Step Content Container */}
-        <div className="glass-card rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-glow-sm">
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg shadow-slate-200/50">
           
           {/* STEP 1: Basic Idea */}
           {currentStep === 1 && (
             <div className="space-y-5">
-              <h2 className="text-xl font-bold font-display text-white">Step 1 — Basic Idea</h2>
+              <h2 className="text-xl font-bold font-display text-slate-900">Step 1 — Basic Idea</h2>
               
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Startup / Working Name <span className="text-rose-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Startup / Working Name <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -232,13 +232,13 @@ export const OnboardingPage = () => {
                   value={formData.name}
                   onChange={(e) => updateField('name', e.target.value)}
                   placeholder="e.g. InnoHealth, EduBoost, FinFlow"
-                  className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                  className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  The Core Business Idea <span className="text-rose-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  The Core Business Idea <span className="text-rose-500">*</span>
                 </label>
                 <textarea
                   rows={3}
@@ -246,13 +246,13 @@ export const OnboardingPage = () => {
                   value={formData.business_idea}
                   onChange={(e) => updateField('business_idea', e.target.value)}
                   placeholder="In 1-2 sentences, what does your startup do and how does it deliver value?"
-                  className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                  className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Problem Being Solved <span className="text-rose-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Problem Being Solved <span className="text-rose-500">*</span>
                 </label>
                 <textarea
                   rows={3}
@@ -260,12 +260,12 @@ export const OnboardingPage = () => {
                   value={formData.problem_being_solved}
                   onChange={(e) => updateField('problem_being_solved', e.target.value)}
                   placeholder="What is the exact pain point customers face today? Why is it urgent?"
-                  className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                  className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Product / Service Description
                 </label>
                 <textarea
@@ -273,7 +273,7 @@ export const OnboardingPage = () => {
                   value={formData.product_description}
                   onChange={(e) => updateField('product_description', e.target.value)}
                   placeholder="Describe the initial solution or product format (e.g. mobile app, SaaS platform, physical marketplace)."
-                  className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                  className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                 />
               </div>
             </div>
@@ -282,11 +282,11 @@ export const OnboardingPage = () => {
           {/* STEP 2: Customer */}
           {currentStep === 2 && (
             <div className="space-y-5">
-              <h2 className="text-xl font-bold font-display text-white">Step 2 — Target Customer</h2>
+              <h2 className="text-xl font-bold font-display text-slate-900">Step 2 — Target Customer</h2>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Who is the Target Customer? <span className="text-rose-400">*</span>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                  Who is the Target Customer? <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -294,17 +294,17 @@ export const OnboardingPage = () => {
                   value={formData.target_customer}
                   onChange={(e) => updateField('target_customer', e.target.value)}
                   placeholder="e.g. College students, SMB factory owners, D2C retail founders"
-                  className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                  className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Business Type</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Business Type</label>
                   <select
                     value={formData.business_type}
                     onChange={(e) => updateField('business_type', e.target.value)}
-                    className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                    className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                   >
                     <option value="B2B">B2B (Business to Business)</option>
                     <option value="B2C">B2C (Business to Consumer)</option>
@@ -314,36 +314,36 @@ export const OnboardingPage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Customer Age Group</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Customer Age Group</label>
                   <input
                     type="text"
                     value={formData.customer_age_group}
                     onChange={(e) => updateField('customer_age_group', e.target.value)}
                     placeholder="e.g. 18-24, 25-45, All ages"
-                    className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                    className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Customer Location / Geography</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Customer Location / Geography</label>
                 <input
                   type="text"
                   value={formData.customer_location}
                   onChange={(e) => updateField('customer_location', e.target.value)}
                   placeholder="e.g. India (Metro cities), Global, Rural India"
-                  className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                  className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Primary Customer Problem</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Primary Customer Problem</label>
                 <textarea
                   rows={2}
                   value={formData.primary_customer_problem}
                   onChange={(e) => updateField('primary_customer_problem', e.target.value)}
                   placeholder="What workaround are they currently using that frustrates them?"
-                  className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                  className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                 />
               </div>
             </div>
@@ -352,15 +352,15 @@ export const OnboardingPage = () => {
           {/* STEP 3: Business */}
           {currentStep === 3 && (
             <div className="space-y-5">
-              <h2 className="text-xl font-bold font-display text-white">Step 3 — Industry & Business Model</h2>
+              <h2 className="text-xl font-bold font-display text-slate-900">Step 3 — Industry & Business Model</h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Industry / Domain</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Industry / Domain</label>
                   <select
                     value={formData.industry}
                     onChange={(e) => updateField('industry', e.target.value)}
-                    className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                    className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                   >
                     <option value="AI & Enterprise Software">AI & Enterprise Software</option>
                     <option value="FinTech & Payments">FinTech & Payments</option>
@@ -376,11 +376,11 @@ export const OnboardingPage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Business Model</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Business Model</label>
                   <select
                     value={formData.business_model}
                     onChange={(e) => updateField('business_model', e.target.value)}
-                    className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                    className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                   >
                     <option value="Subscription (SaaS)">Subscription (SaaS)</option>
                     <option value="Marketplace Commission">Marketplace Commission</option>
@@ -393,24 +393,24 @@ export const OnboardingPage = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Expected Pricing</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Expected Pricing</label>
                 <input
                   type="text"
                   value={formData.expected_pricing}
                   onChange={(e) => updateField('expected_pricing', e.target.value)}
                   placeholder="e.g. ₹499/mo, ₹2,499 one-time, 2.5% transaction fee"
-                  className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                  className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Current Competitors / Alternatives</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Current Competitors / Alternatives</label>
                 <input
                   type="text"
                   value={formData.current_competitors}
                   onChange={(e) => updateField('current_competitors', e.target.value)}
                   placeholder="Who else solves this or what alternative tools do customers use?"
-                  className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                  className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                 />
               </div>
             </div>
@@ -419,26 +419,26 @@ export const OnboardingPage = () => {
           {/* STEP 4: Founder */}
           {currentStep === 4 && (
             <div className="space-y-5">
-              <h2 className="text-xl font-bold font-display text-white">Step 4 — Founder & Team</h2>
+              <h2 className="text-xl font-bold font-display text-slate-900">Step 4 — Founder & Team</h2>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Founder Background & Experience</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-1.5">Founder Background & Experience</label>
                 <input
                   type="text"
                   value={formData.founder_experience}
                   onChange={(e) => updateField('founder_experience', e.target.value)}
                   placeholder="e.g. College student, 3 yrs developer, marketing specialist"
-                  className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                  className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Available Budget</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Available Budget</label>
                   <select
                     value={formData.available_budget}
                     onChange={(e) => updateField('available_budget', e.target.value)}
-                    className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                    className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                   >
                     <option value="< ₹50,000">&lt; ₹50,000 (Bootstrapping)</option>
                     <option value="₹50,000 - ₹2,00,000">₹50,000 - ₹2,00,000</option>
@@ -448,11 +448,11 @@ export const OnboardingPage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Time Commitment</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">Time Commitment</label>
                   <select
                     value={formData.time_commitment}
                     onChange={(e) => updateField('time_commitment', e.target.value)}
-                    className="w-full px-4 py-3 bg-surface-50 text-white text-sm rounded-xl border border-slate-700 focus:border-primary-500 focus:outline-none"
+                    className="w-full px-4 py-3 bg-white text-slate-900 text-sm rounded-xl border border-slate-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-100 focus:outline-none"
                   >
                     <option value="Full-time">Full-time</option>
                     <option value="Part-time">Part-time</option>
@@ -462,7 +462,7 @@ export const OnboardingPage = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-2">Team Skills (Select all that apply)</label>
+                <label className="block text-xs font-semibold text-slate-700 mb-2">Team Skills (Select all that apply)</label>
                 <div className="flex flex-wrap gap-2">
                   {['Software Development', 'Product Design / UI', 'Marketing & Sales', 'Domain Expertise', 'Finance & Ops', 'Legal / CA'].map(skill => {
                     const selected = formData.skills.includes(skill);
@@ -473,8 +473,8 @@ export const OnboardingPage = () => {
                         onClick={() => toggleSkill(skill)}
                         className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
                           selected
-                            ? 'bg-primary-600 border-primary-500 text-white shadow-glow-sm'
-                            : 'bg-surface-50 border-slate-700 text-slate-400 hover:text-white'
+                            ? 'bg-primary-600 border-primary-500 text-white shadow-sm'
+                            : 'bg-slate-50 border-slate-300 text-slate-700 hover:bg-slate-100'
                         }`}
                       >
                         {skill}
@@ -489,8 +489,8 @@ export const OnboardingPage = () => {
           {/* STEP 5: Startup Stage */}
           {currentStep === 5 && (
             <div className="space-y-5">
-              <h2 className="text-xl font-bold font-display text-white">Step 5 — Current Startup Stage</h2>
-              <p className="text-xs text-slate-400">Select where you are today in your startup journey.</p>
+              <h2 className="text-xl font-bold font-display text-slate-900">Step 5 — Current Startup Stage</h2>
+              <p className="text-xs text-slate-500">Select where you are today in your startup journey.</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {[
@@ -508,12 +508,12 @@ export const OnboardingPage = () => {
                       onClick={() => updateField('stage', st.key)}
                       className={`p-4 rounded-xl border cursor-pointer transition-all ${
                         selected
-                          ? 'bg-primary-600/20 border-primary-500 text-white shadow-glow-sm'
-                          : 'bg-surface-50 border-slate-800 text-slate-400 hover:border-slate-700'
+                          ? 'bg-primary-50 border-primary-500 text-primary-900 shadow-sm font-semibold'
+                          : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      <h4 className="font-bold text-sm text-white mb-1">{st.label}</h4>
-                      <p className="text-[11px] text-slate-400 leading-relaxed">{st.desc}</p>
+                      <h4 className="font-bold text-sm text-slate-900 mb-1">{st.label}</h4>
+                      <p className="text-[11px] text-slate-500 leading-relaxed">{st.desc}</p>
                     </div>
                   );
                 })}
@@ -524,8 +524,8 @@ export const OnboardingPage = () => {
           {/* STEP 6: Goals */}
           {currentStep === 6 && (
             <div className="space-y-5">
-              <h2 className="text-xl font-bold font-display text-white">Step 6 — What do you want help with?</h2>
-              <p className="text-xs text-slate-400">Select your top priorities for INOVEX AI to focus on.</p>
+              <h2 className="text-xl font-bold font-display text-slate-900">Step 6 — What do you want help with?</h2>
+              <p className="text-xs text-slate-500">Select your top priorities for INOVEX AI to focus on.</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
@@ -545,15 +545,15 @@ export const OnboardingPage = () => {
                       onClick={() => toggleGoal(goal)}
                       className={`p-3.5 rounded-xl border cursor-pointer flex items-center justify-between transition-all ${
                         selected
-                          ? 'bg-primary-600/20 border-primary-500 text-white shadow-glow-sm'
-                          : 'bg-surface-50 border-slate-800 text-slate-400 hover:border-slate-700'
+                          ? 'bg-primary-50 border-primary-500 text-primary-900 shadow-sm'
+                          : 'bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      <span className="text-xs font-semibold text-slate-200">{goal}</span>
+                      <span className="text-xs font-semibold text-slate-800">{goal}</span>
                       {selected ? (
-                        <CheckCircle2 className="w-4 h-4 text-primary-400" />
+                        <CheckCircle2 className="w-4 h-4 text-primary-600" />
                       ) : (
-                        <div className="w-4 h-4 rounded border border-slate-700" />
+                        <div className="w-4 h-4 rounded border border-slate-300 bg-white" />
                       )}
                     </div>
                   );
@@ -563,13 +563,13 @@ export const OnboardingPage = () => {
           )}
 
           {/* Navigation Action Buttons */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-slate-800">
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-slate-200">
             {currentStep > 1 ? (
               <button
                 type="button"
                 onClick={handlePrev}
                 disabled={loading}
-                className="px-4 py-2.5 rounded-xl bg-surface-50 hover:bg-surface-100 border border-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                className="px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-300 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back
@@ -580,7 +580,7 @@ export const OnboardingPage = () => {
               <button
                 type="button"
                 onClick={handleNext}
-                className="px-6 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-white text-xs font-semibold shadow-glow-sm flex items-center gap-1.5 transition-all"
+                className="px-6 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-semibold shadow-md shadow-primary-500/20 flex items-center gap-1.5 transition-all cursor-pointer"
               >
                 Continue
                 <ArrowRight className="w-4 h-4" />
@@ -590,7 +590,7 @@ export const OnboardingPage = () => {
                 type="button"
                 onClick={handleSubmit}
                 disabled={loading}
-                className="px-7 py-3 rounded-xl bg-gradient-to-r from-primary-600 to-accent-cyan hover:opacity-95 text-white text-sm font-bold shadow-glow-md flex items-center gap-2 transition-all disabled:opacity-50"
+                className="px-7 py-3 rounded-xl bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-700 hover:to-indigo-700 text-white text-sm font-bold shadow-lg shadow-primary-500/25 flex items-center gap-2 transition-all disabled:opacity-50 cursor-pointer"
               >
                 {loading ? (
                   <>
